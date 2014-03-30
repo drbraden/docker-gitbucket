@@ -2,16 +2,14 @@
 
 # Building the docker image
 
-
     $ git clone https://github.com/drbraden/docker-gitbucket.git
     $ cd docker-gitbucket
     docker-gitbucket$ docker build -t gitbucket .
 
-
 # Running the docker image
 First, you need to create a folder that will hold all of the gitbucket data (repos, wikis, issues, settings, everything).  Without this step, all of your data would be lost anytime the container closed, whether it be from a system crash, a docker kill command, or someone tripping over the powercord.  Having the data directory external to the app will give us persistence.
 
-I like to go with /var/docker/gitbucket.
+I like to go with /var/docker-volumes/gitbucket.
 
 It also makes it easier to perform backups.  You can just stop the container, copy and/or ship off the data to it's backup home, and then restart the container.  Easy peasy.
 
@@ -28,6 +26,10 @@ This command launches an existing gitbucket:
 |-p 8081:8081	|Maps real port 8081 to container's 8081 (git ssh)|
 |-p 8082:22			|Maps real port 8082 to container's 22 (system ssh, pw in logs)|
 |-v /var/docker/gitbucket:/data:rw	|Maps host's /var/docker/gitbucket to the container's /data, with read+write access|
+
+The http and ssh ports are specified on the System Settings section of the
+Administration page.  The http port is part of the Base URL (e.g.  http://dev3-1:8080), while the SSH port is specified in the SSH Port field.
+
 ## License
 
 Docker-Gitbucket is under New BSD License. See the bundled LICENSE file for details.

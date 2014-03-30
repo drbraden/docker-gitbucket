@@ -26,8 +26,8 @@ RUN mkdir -p /var/log/supervisor/
 RUN mkdir -p /var/run/sshd
 RUN chmod 0755 /var/run/sshd
 
-EXPOSE 8022
 EXPOSE 8080
+EXPOSE 8081
 EXPOSE 22
 
 CMD ["/bin/bash", "/start.sh"]
